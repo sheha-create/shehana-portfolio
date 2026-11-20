@@ -32,12 +32,16 @@ a { color: inherit; }
 /* Cinematic stage */
 .track { position: relative; }
 .stage { position: sticky; top: 0; height: 100vh; height: 100dvh; width: 100%; overflow: hidden; }
-.stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; background: var(--ink); }
+.stage canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%; display: block; background: var(--ink);
+  transform: translateZ(0);
+  filter: contrast(1.05) brightness(1.02);
+}
 .vignette {
   position: absolute; inset: 0; pointer-events: none;
   background:
-    linear-gradient(to top, rgba(13,10,7,.88) 0%, rgba(13,10,7,.55) 30%, rgba(13,10,7,0) 58%),
-    radial-gradient(ellipse at center, rgba(13,10,7,0) 55%, rgba(13,10,7,.55) 100%);
+    linear-gradient(to top, rgba(13,10,7,.92) 0%, rgba(13,10,7,.45) 30%, rgba(13,10,7,0) 58%),
+    radial-gradient(ellipse at center, rgba(13,10,7,0) 50%, rgba(13,10,7,.6) 100%);
 }
 .copy { position: absolute; bottom: clamp(1.5rem, 7vh, 5rem); width: min(36rem, 100%); padding: 0 clamp(1.25rem, 6vw, 5rem); pointer-events: none; }
 .copy.intro { width: min(46rem, 100%); }
@@ -59,6 +63,27 @@ a { color: inherit; }
 .copy.center .links { justify-content: center; }
 .item .links a { color: var(--champagne); text-underline-offset: .35em; text-decoration-color: var(--bronze); }
 .item .links a:hover { color: var(--amber); }
+.item .links a.resume-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(217, 162, 79, 0.15);
+  border: 1px solid var(--amber);
+  color: var(--champagne);
+  padding: 0.55rem 1.25rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition: all 0.25s ease;
+  backdrop-filter: blur(8px);
+}
+.item .links a.resume-btn:hover {
+  background: var(--amber);
+  color: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(217, 162, 79, 0.35);
+}
 .item .count { margin-top: .9rem; font-size: .78rem; color: var(--smoke); }
 
 /* Loader */

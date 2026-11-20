@@ -27,7 +27,7 @@ export const profile = {
   github: "https://github.com/sheha-create",
   linkedin: "https://www.linkedin.com/in/shehana-safreen-543448356/",
   // Set to the real résumé PDF path (e.g. "/Shehana-Safreen-Resume.pdf") to show a download button. Empty = no button.
-  resumeUrl: "",
+  resumeUrl: "/Shehana-Safreen-Resume.pdf",
 };
 
 export const achievements = [
@@ -134,6 +134,7 @@ export const scenes: Scene[] = [
       heading: "Let's talk",
       body: [profile.location],
       links: [
+        { label: "Download Official Résumé", href: "/Shehana-Safreen-Resume.pdf" },
         { label: profile.email, href: `mailto:${profile.email}` },
         { label: "GitHub", href: profile.github },
         { label: "LinkedIn", href: profile.linkedin },

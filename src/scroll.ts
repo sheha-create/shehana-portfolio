@@ -16,5 +16,11 @@ export function scrollToAnchor(id: string) {
 
 // Lets the second stage wait until the first stage's frames have finished loading.
 let release!: () => void;
+let released = false;
 export const firstStageLoaded = new Promise<void>((r) => { release = r; });
-export const markFirstStageLoaded = () => release();
+export const markFirstStageLoaded = () => {
+  if (!released && release) {
+    released = true;
+    release();
+  }
+};
