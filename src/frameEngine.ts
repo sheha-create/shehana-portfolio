@@ -84,7 +84,7 @@ export class FrameStore {
     this.decode(s, want);
     // Lookahead only when the decode queue is short, so a fast flick never buries the exact frame behind stale work.
     if (this.pending.size < 6) {
-      for (let k = 1; k <= 10; k++) {
+      for (let k = 1; k <= 14; k++) {
         const a = want + dir * k, b = want - dir * (k >> 1);
         if (a >= 0 && a < n) this.decode(s, a);
         if (b >= 0 && b < n) this.decode(s, b);
@@ -107,7 +107,7 @@ export class FrameStore {
 }
 
 export function buildStore(scenes: Scene[], tier: Tier) {
-  const maxDecoded = tier === "desktop" ? 72 : 96; // ~270 MB / ~115 MB worst case
+  const maxDecoded = tier === "desktop" ? 120 : 96; // ~450 MB / ~115 MB worst case
   return new FrameStore(scenes.map((s) => s.id), scenes.map((s) => s.frames[tier]), tier, maxDecoded);
 }
 
@@ -115,6 +115,8 @@ export function buildStore(scenes: Scene[], tier: Tier) {
 export function drawCover(ctx: CanvasRenderingContext2D, bmp: ImageBitmap, w: number, h: number, alpha = 1) {
   const s = Math.max(w / bmp.width, h / bmp.height);
   const dw = bmp.width * s, dh = bmp.height * s;
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
   ctx.globalAlpha = alpha;
   ctx.drawImage(bmp, (w - dw) / 2, (h - dh) / 2, dw, dh);
   ctx.globalAlpha = 1;

@@ -47,10 +47,16 @@ export default function CinematicStage({ sceneIds, primary = false }: Props) {
       if (primary) markFirstStageLoaded();
     })();
 
+    const applySmoothing = () => {
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
+    };
+
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(window.innerWidth * dpr);
       canvas.height = Math.round(window.innerHeight * dpr);
+      applySmoothing();
     };
     resize();
     window.addEventListener("resize", resize);
@@ -75,7 +81,7 @@ export default function CinematicStage({ sceneIds, primary = false }: Props) {
     const n = list.length;
     const render = () => {
       const prev = shown;
-      shown += (target - shown) * (reduced.current ? 1 : 0.14); // light inertia, works in both directions
+      shown += (target - shown) * (reduced.current ? 1 : 0.18); // light inertia, works in both directions
       if (Math.abs(shown - prev) > 1e-6) dir = shown > prev ? 1 : -1;
       const g = Math.min(shown, 0.99999);
       let i = 0;
